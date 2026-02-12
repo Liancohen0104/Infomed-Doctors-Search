@@ -1,4 +1,3 @@
-using System.Reflection.Metadata.Ecma335;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using server.Models;
@@ -12,84 +11,122 @@ public class DoctorsController : ControllerBase
     [HttpGet(Name = "GetAllDoctors")]
     public async Task<IActionResult> GetAll()
     {
-        var doctors = await LoadAllDoctors();
-
-        return Ok(doctors);
+        try
+        {
+            var doctors = await LoadAllDoctors();
+            return Ok(doctors);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
     }
 
     [HttpGet("{id:int}", Name = "GetDoctorById")]
     public async Task<IActionResult> GetById(int id)
     {
-        var doctors = await LoadAllDoctors();
-        var doctor = doctors.FirstOrDefault(d => d.Id == id);
+        if (id <= 0)
+            return BadRequest("Id must be greater than 0.");
 
-        if (doctor == null)
+        try
         {
-            return NotFound();
-        }
+            var doctors = await LoadAllDoctors();
+            var doctor = doctors.FirstOrDefault(d => d.Id == id);
 
-        return Ok(doctor);
+            if (doctor == null)
+                return NotFound($"Doctor with id {id} not found.");
+
+            return Ok(doctor);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
     }
 
     [HttpGet("active")]
     public async Task<IActionResult> GetActive()
     {
-        var doctors = await LoadAllDoctors();
-        var active = doctors.Where(d => d.IsActive).ToList();
-
-        return Ok(active);
+        try
+        {
+            var doctors = await LoadAllDoctors();
+            var active = doctors.Where(d => d.IsActive).ToList();
+            return Ok(active);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
     }
 
     [HttpGet("promoted")]
     public async Task<IActionResult> GetPromoted()
     {
-        var doctors = await LoadAllDoctors();
-        var promoted = doctors.Where(d => d.PromotionLevel <= 5).ToList();
-
-        return Ok(promoted);
+        try
+        {
+            var doctors = await LoadAllDoctors();
+            var promoted = doctors.Where(d => d.PromotionLevel <= 5).ToList();
+            return Ok(promoted);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
     }
 
     [HttpGet("sorted")]
     public async Task<IActionResult> GetSorted()
     {
-        var doctors = await LoadAllDoctors();
+        try
+        {
+            var doctors = await LoadAllDoctors();
 
-        var sorted = doctors
-            .OrderByDescending(d => d.Reviews.AverageRating)
-            .ThenByDescending(d => d.Reviews.TotalRatings)
-            .ThenBy(d => d.PromotionLevel)
-            .ToList();
+            var sorted = doctors
+                .OrderByDescending(d => d.Reviews.AverageRating)
+                .ThenByDescending(d => d.Reviews.TotalRatings)
+                .ThenBy(d => d.PromotionLevel)
+                .ToList();
 
-        return Ok(sorted);
+            return Ok(sorted);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
     }
 
     private async Task<List<Doctor>> LoadAllDoctors()
     {
+        // בדיקה שהקבצים קיימים
+        if (!System.IO.File.Exists("Data/doctors.json"))
+            throw new FileNotFoundException("doctors.json not found.");
+
+        if (!System.IO.File.Exists("Data/language.json"))
+            throw new FileNotFoundException("language.json not found.");
+
         // קריאת רופאים
         var doctorsJson = await System.IO.File.ReadAllTextAsync("Data/doctors.json");
         var doctors = JsonSerializer.Deserialize<List<Doctor>>(doctorsJson, new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true
-        }) ?? new List<Doctor>();
+        }) ?? throw new Exception("Failed to deserialize doctors.json");
 
         // קריאת שפות
         var languagesJson = await System.IO.File.ReadAllTextAsync("Data/language.json");
         var languageData = JsonSerializer.Deserialize<LanguageData>(languagesJson, new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true
-        });
+        }) ?? throw new Exception("Failed to deserialize language.json");
 
-        var languagesDict = languageData?.Languages ?? new Dictionary<string, string>();
+        var languagesDict = languageData.Languages ?? new Dictionary<string, string>();
 
         // המרה ממזהי שפות לשמות שפות
         foreach (var doctor in doctors)
         {
-            var names = doctor.LanguageIds
+            doctor.LanguageIds = doctor.LanguageIds
                 .Where(id => languagesDict.ContainsKey(id))
                 .Select(id => languagesDict[id])
                 .ToList();
-
-            doctor.LanguageIds = names; // החלפת הרשימה המקורית ברשימת שמות
         }
 
         return doctors;
