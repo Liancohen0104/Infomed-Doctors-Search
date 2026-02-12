@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Data\*.json">
+    <Content Update="Data\*.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.2" />
