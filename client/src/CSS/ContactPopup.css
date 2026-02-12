@@ -1,0 +1,67 @@
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  direction: rtl;
+}
+
+.popup {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  padding: 36px 32px 28px;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.popup_close {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #888;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.popup_close:hover {
+  color: #1a2c35;
+  background: #f0f0f0;
+}
+
+.popup_name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a2c35;
+  margin-bottom: 16px;
+}
+
+.popup_phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: #3dbfbf;
+  color: #fff;
+  border-radius: 8px;
+  font-family: 'Heebo', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  direction: ltr;
+}
+
+.popup_phone svg {
+  width: 17px;
+  height: 17px;
+}
