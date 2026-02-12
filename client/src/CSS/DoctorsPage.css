@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: 'Heebo', sans-serif;
+  font-family: 'Assistant', 'Heebo', sans-serif;
   background: #f4f8f9;
   direction: rtl;
 }
@@ -20,7 +20,7 @@ body {
 .doctors-page_logoWrapper {
   margin: 40px;
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   border-bottom: 1px solid #eef2f7;
 }
 
@@ -58,7 +58,7 @@ body {
   padding: 0 38px 0 14px;
   border: 1.5px solid #dde8ea;
   border-radius: 8px;
-  font-family: 'Heebo', sans-serif;
+  font-family: 'Assistant', 'Heebo', sans-serif;
   font-size: 0.875rem;
   color: #1a2c35;
   background: #fff;
@@ -67,7 +67,7 @@ body {
   transition: border-color 0.15s;
 }
 
-.search__input:focus {
+.search_input:focus {
   border-color: #3dbfbf;
 }
 
@@ -84,7 +84,7 @@ body {
   border-radius: 20px;
   background: transparent;
   color: #3dbfbf;
-  font-family: 'Heebo', sans-serif;
+  font-family: 'Assistant', 'Heebo', sans-serif;
   font-size: 0.875rem;
   cursor: pointer;
 }
@@ -122,10 +122,11 @@ body {
 }
 
 .doctorRow_right {
+  width: 250px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 4px;
+  gap: 10px;
   min-width: 160px;
 }
 
@@ -133,18 +134,19 @@ body {
   font-size: 1rem;
   font-weight: 700;
   color: #1a2c35;
+  letter-spacing: 0.01em;
 }
 
 .doctorRow_middle {
   flex: 1;
   text-align: right;
   padding: 0 32px;
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   color: #4a5a62;
 }
 
 .doctorRow_label {
-  font-weight: 500;
+  font-weight: 600;
   color: #1a2c35;
 }
 
@@ -160,13 +162,14 @@ body {
 .doctorRow_contactBtn {
   display: flex;
   align-items: center;
+  font-weight: 600;
   height: 35px;
   width: 160px;
   padding: 0 10px;
   border: 1.5px solid #3dbfbf;
   border-radius: 6px;
   background: transparent;
-  font-family: 'Heebo', sans-serif;
+  font-family: 'Assistant', 'Heebo', sans-serif;
   font-size: 0.875rem;
   color: #1a2c35;
   cursor: pointer;
@@ -207,4 +210,3 @@ body {
   font-size: 0.8rem;
   color: #4a5a62;
 }
-

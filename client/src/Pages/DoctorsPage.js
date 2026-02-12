@@ -47,12 +47,12 @@ function RatingStars({ value = 0, max = 5 }) {
   const fullCount = Math.round(rating);
   return (
     <div className="rating">
-      <div className="rating__stars">
+      <div className="rating_stars">
         {Array.from({ length: max }).map((_, i) =>
           i < fullCount ? <StarFull key={i} /> : <StarEmpty key={i} />
         )}
       </div>
-      <span className="rating__value">({rating.toFixed(1)})</span>
+      <span className="rating_value">({rating.toFixed(1)})</span>
     </div>
   );
 }
