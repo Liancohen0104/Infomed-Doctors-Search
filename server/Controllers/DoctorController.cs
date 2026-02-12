@@ -14,7 +14,13 @@ public class DoctorsController : ControllerBase
         try
         {
             var doctors = await LoadAllDoctors();
-            return Ok(doctors);
+             var sorted = doctors
+                .OrderByDescending(d => d.Reviews.AverageRating)
+                .ThenByDescending(d => d.Reviews.TotalRatings)
+                .ThenBy(d => d.PromotionLevel)
+                .ToList();
+
+            return Ok(sorted);
         }
         catch (Exception ex)
         {
@@ -51,7 +57,13 @@ public class DoctorsController : ControllerBase
         {
             var doctors = await LoadAllDoctors();
             var active = doctors.Where(d => d.IsActive).ToList();
-            return Ok(active);
+             var sorted = active
+                .OrderByDescending(d => d.Reviews.AverageRating)
+                .ThenByDescending(d => d.Reviews.TotalRatings)
+                .ThenBy(d => d.PromotionLevel)
+                .ToList();
+                
+            return Ok(sorted);
         }
         catch (Exception ex)
         {
@@ -66,22 +78,7 @@ public class DoctorsController : ControllerBase
         {
             var doctors = await LoadAllDoctors();
             var promoted = doctors.Where(d => d.PromotionLevel <= 5).ToList();
-            return Ok(promoted);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, $"Internal server error: {ex.Message}");
-        }
-    }
-
-    [HttpGet("sorted")]
-    public async Task<IActionResult> GetSorted()
-    {
-        try
-        {
-            var doctors = await LoadAllDoctors();
-
-            var sorted = doctors
+             var sorted = promoted
                 .OrderByDescending(d => d.Reviews.AverageRating)
                 .ThenByDescending(d => d.Reviews.TotalRatings)
                 .ThenBy(d => d.PromotionLevel)
