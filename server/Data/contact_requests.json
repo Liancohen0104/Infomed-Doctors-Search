@@ -34,5 +34,14 @@
     "Phone": "0544870616",
     "Email": "liancohen0104@gmail.com",
     "CreatedAt": "2026-02-13T09:48:54.5078093Z"
+  },
+  {
+    "Id": 5,
+    "DoctorId": 144646,
+    "DoctorName": "דוד שרים ושות'",
+    "FullName": "ליאן כהן",
+    "Phone": "0544870616",
+    "Email": "liancohen0104@gmail.com",
+    "CreatedAt": "2026-02-13T09:51:54.3288403Z"
   }
 ]

@@ -38,10 +38,7 @@ export default function ContactPopup({ doctor, onClose, onSubmit }) {
       }
 
       alert("הפנייה נשלחה בהצלחה");
-      
-      setTimeout(() => {
-        onClose();
-      }, 2000);
+      onClose();
 
     } catch (err) {
       setError("אירעה שגיאה בשליחה");
