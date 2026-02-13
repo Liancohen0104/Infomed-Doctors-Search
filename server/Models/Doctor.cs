@@ -24,6 +24,9 @@ public class Doctor
 
     [JsonPropertyName("promotionLevel")]
     public int PromotionLevel { get; set; }
+    
+    [JsonPropertyName("hasArticle")]
+    public bool HasArticle { get; set; }
 }
 
 public class DoctorReviews

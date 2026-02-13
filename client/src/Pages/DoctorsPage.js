@@ -157,6 +157,10 @@ export default function DoctorsPage() {
                       <span className="doctorRow_label">נותן שירות בשפה: </span>
                       <span>{languages}</span>
                     </div>
+                    <div className="doctorRow_line">
+                      <span className="doctorRow_label">לרופא יש כתבה משוייכת: </span>
+                      <span>{d.hasArticle ? "כן" : "לא"}</span>
+                    </div>
                   </div>
 
                   <div className="doctorRow_left">

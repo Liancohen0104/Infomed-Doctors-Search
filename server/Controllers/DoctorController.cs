@@ -101,6 +101,10 @@ public class DoctorsController : ControllerBase
         if (!System.IO.File.Exists("Data/language.json"))
             throw new FileNotFoundException("language.json not found.");
 
+        if (!System.IO.File.Exists("Data/articles.json"))
+            throw new FileNotFoundException("articles.json not found.");
+
+
         // קריאת רופאים
         var doctorsJson = await System.IO.File.ReadAllTextAsync("Data/doctors.json");
         var doctors = JsonSerializer.Deserialize<List<Doctor>>(doctorsJson, new JsonSerializerOptions
@@ -117,13 +121,31 @@ public class DoctorsController : ControllerBase
 
         var languagesDict = languageData.Languages ?? new Dictionary<string, string>();
 
-        // המרה ממזהי שפות לשמות שפות
+        // קריאת מאמרים
+        var articleJson = await System.IO.File.ReadAllTextAsync("Data/articles.json");
+        var articles = JsonSerializer.Deserialize<List<Article>>(articleJson, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        }) ?? throw new Exception("Failed to deserialize articles.json");
+
+        // סינון מאמרים לא פעילים
+        var activeArticles = articles.Where(a => a.IsActive).ToList();
+        var sponsoredDoctorIds = new HashSet<int>(
+        activeArticles
+            .Where(a => a.Sponsorships != null)
+            .SelectMany(a => a.Sponsorships!)
+            .Select(s => s.SponsorshipId)
+        );
+
+        // המרה ממזהי שפות לשמות שפות ושיוך כתבה לרופא
         foreach (var doctor in doctors)
         {
             doctor.LanguageIds = doctor.LanguageIds
                 .Where(id => languagesDict.ContainsKey(id))
                 .Select(id => languagesDict[id])
                 .ToList();
+
+            doctor.HasArticle = sponsoredDoctorIds.Contains(doctor.Id);
         }
 
         return doctors;
