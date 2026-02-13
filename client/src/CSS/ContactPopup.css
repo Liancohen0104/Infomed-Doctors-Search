@@ -1,67 +1,79 @@
 .popup-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.55);
   display: flex;
-  align-items: center;
   justify-content: center;
-  z-index: 1000;
+  align-items: center;
+  z-index: 999;
   direction: rtl;
 }
 
 .popup {
+  background: #ffffff;
+  width: 400px;
+  max-width: 90%;
+  padding: 30px;
+  border-radius: 16px;
   position: relative;
-  background: #fff;
-  border-radius: 12px;
-  padding: 36px 32px 28px;
-  width: 320px;
-  text-align: center;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.25s ease;
 }
 
 .popup_close {
   position: absolute;
   top: 12px;
   left: 12px;
-  background: transparent;
+  background: none;
   border: none;
   cursor: pointer;
-  color: #888;
+  color: #666;
+}
+
+.popup_title {
+  margin-bottom: 20px;
   font-size: 18px;
-  display: flex;
-  align-items: center;
-  padding: 4px;
-  border-radius: 4px;
-}
-
-.popup_close:hover {
-  color: #1a2c35;
-  background: #f0f0f0;
-}
-
-.popup_name {
-  font-size: 1rem;
   font-weight: 600;
-  color: #1a2c35;
-  margin-bottom: 16px;
+  text-align: center;
 }
 
-.popup_phone {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 24px;
-  background: #3dbfbf;
-  color: #fff;
-  border-radius: 8px;
-  font-family: 'Heebo', sans-serif;
-  font-size: 1rem;
+.popup_form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.popup_form input {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #dcdcdc;
+  font-size: 14px;
+  text-align: right;
+}
+
+.popup_form input:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.popup_submit {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background: #111111;
+  color: white;
   font-weight: 500;
-  text-decoration: none;
-  direction: ltr;
+  cursor: pointer;
+  transition: 0.2s ease;
 }
 
-.popup_phone svg {
-  width: 17px;
-  height: 17px;
+.popup_submit:hover {
+  opacity: 0.9;
 }
+
+.popup_error {
+  color: #d60000;
+  font-size: 13px;
+  text-align: center;
+}
+

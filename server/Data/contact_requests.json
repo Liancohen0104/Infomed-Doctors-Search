@@ -1,0 +1,38 @@
+[
+  {
+    "Id": 1,
+    "DoctorId": 94052,
+    "DoctorName": "יאנה בייטלמן",
+    "FullName": "ליאן",
+    "Phone": "0544870616",
+    "Email": "liancohen0104@gmail.com",
+    "CreatedAt": "2026-02-13T09:42:02.9963606Z"
+  },
+  {
+    "Id": 2,
+    "DoctorId": 94516,
+    "DoctorName": "הווארד עמיטל",
+    "FullName": "שחר יוסף",
+    "Phone": "0525700056",
+    "Email": "shaharyosef6@gmail.com",
+    "CreatedAt": "2026-02-13T09:44:34.2640796Z"
+  },
+  {
+    "Id": 3,
+    "DoctorId": 94816,
+    "DoctorName": "רון סלע",
+    "FullName": "יהב בן חור",
+    "Phone": "0526792555",
+    "Email": "yahavbenhur@gmail.com",
+    "CreatedAt": "2026-02-13T09:48:43.2371441Z"
+  },
+  {
+    "Id": 4,
+    "DoctorId": 85550,
+    "DoctorName": "קובי כהן",
+    "FullName": "ליאן",
+    "Phone": "0544870616",
+    "Email": "liancohen0104@gmail.com",
+    "CreatedAt": "2026-02-13T09:48:54.5078093Z"
+  }
+]

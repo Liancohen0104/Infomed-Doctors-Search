@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchDoctors, fetchActiveDoctors, fetchPromotedDoctors } from "../Api/DoctorApi";
+import { sendContactRequest } from "../Api/ContactApi";
 import { FiPhoneCall, FiSend, FiSearch } from "react-icons/fi";
 import ContactPopup from "../Components/ContactPopup";
 import "../CSS/DoctorsPage.css";
@@ -187,8 +188,8 @@ export default function DoctorsPage() {
       {popupDoctor && (
         <ContactPopup
           doctor={popupDoctor.doctor}
-          phone={popupDoctor.phone}
           onClose={() => setPopupDoctor(null)}
+          onSubmit={sendContactRequest}
         />
       )}
     </div>
