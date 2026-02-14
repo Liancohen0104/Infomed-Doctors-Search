@@ -5,7 +5,7 @@ namespace server.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ContactsController : ControllerBase
+public class ContactController : ControllerBase
 {
     private static readonly object FileLock = new();
     private const string FilePath = "Data/contact_requests.json";

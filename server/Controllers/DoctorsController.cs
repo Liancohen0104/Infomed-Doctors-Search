@@ -8,41 +8,19 @@ namespace server.Controllers;
 [Route("api/[controller]")]
 public class DoctorsController : ControllerBase
 {
-    [HttpGet(Name = "GetAllDoctors")]
+    [HttpGet()]
     public async Task<IActionResult> GetAll()
     {
         try
         {
             var doctors = await LoadAllDoctors();
-             var sorted = doctors
+            var sorted = doctors
                 .OrderByDescending(d => d.Reviews.AverageRating)
                 .ThenByDescending(d => d.Reviews.TotalRatings)
                 .ThenBy(d => d.PromotionLevel)
                 .ToList();
 
             return Ok(sorted);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, $"Internal server error: {ex.Message}");
-        }
-    }
-
-    [HttpGet("{id:int}", Name = "GetDoctorById")]
-    public async Task<IActionResult> GetById(int id)
-    {
-        if (id <= 0)
-            return BadRequest("Id must be greater than 0.");
-
-        try
-        {
-            var doctors = await LoadAllDoctors();
-            var doctor = doctors.FirstOrDefault(d => d.Id == id);
-
-            if (doctor == null)
-                return NotFound($"Doctor with id {id} not found.");
-
-            return Ok(doctor);
         }
         catch (Exception ex)
         {
@@ -104,7 +82,6 @@ public class DoctorsController : ControllerBase
         if (!System.IO.File.Exists("Data/articles.json"))
             throw new FileNotFoundException("articles.json not found.");
 
-
         // קריאת רופאים
         var doctorsJson = await System.IO.File.ReadAllTextAsync("Data/doctors.json");
         var doctors = JsonSerializer.Deserialize<List<Doctor>>(doctorsJson, new JsonSerializerOptions
@@ -130,8 +107,7 @@ public class DoctorsController : ControllerBase
 
         // סינון מאמרים לא פעילים
         var activeArticles = articles.Where(a => a.IsActive).ToList();
-        var sponsoredDoctorIds = new HashSet<int>(
-        activeArticles
+        var sponsoredDoctorIds = new HashSet<int>(activeArticles
             .Where(a => a.Sponsorships != null)
             .SelectMany(a => a.Sponsorships!)
             .Select(s => s.SponsorshipId)

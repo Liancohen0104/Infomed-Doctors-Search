@@ -43,5 +43,14 @@
     "Phone": "0544870616",
     "Email": "liancohen0104@gmail.com",
     "CreatedAt": "2026-02-13T09:51:54.3288403Z"
+  },
+  {
+    "Id": 6,
+    "DoctorId": 94052,
+    "DoctorName": "יאנה בייטלמן",
+    "FullName": "ליאן",
+    "Phone": "0544870616",
+    "Email": "liancohen0104@gmail.com",
+    "CreatedAt": "2026-02-13T17:29:30.5982524Z"
   }
 ]

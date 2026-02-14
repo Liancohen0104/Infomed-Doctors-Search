@@ -10,11 +10,6 @@ export async function fetchDoctors() {
   return res.data;
 }
 
-export async function fetchDoctorById(id) {
-  const res = await api.get(`/doctors/${id}`);
-  return res.data;
-}
-
 export async function fetchActiveDoctors() {
   const res = await api.get("/doctors/active");
   return res.data;
