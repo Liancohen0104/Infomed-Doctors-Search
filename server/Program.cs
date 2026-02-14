@@ -9,8 +9,8 @@ builder.Services.AddCors(options =>
     options.AddPolicy("ClientCors", (corsbuilder) =>
     {
         corsbuilder.WithOrigins("http://localhost:3000")
-              .AllowAnyHeader()
-              .AllowAnyMethod();
+            .AllowAnyHeader()
+            .AllowAnyMethod();
     });
 });
 
