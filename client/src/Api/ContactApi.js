@@ -6,6 +6,6 @@ const api = axios.create({
 });
 
 export async function sendContactRequest(payload) {
-  const res = await api.post("/contacts", payload);
+  const res = await api.post("/contact", payload);
   return res.data;
 }
